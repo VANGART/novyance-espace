@@ -2,12 +2,10 @@
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex, nofollow">
 <title>Pilotage GEM</title>
 
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap">
 <style>
 img{max-width:100%}[hidden]{display:none!important}
 
-/* Outil aux couleurs de GEM : barre bleu nuit, plan de travail clair, deux couleurs d'origine (Novyance en orange, hors Novyance en bleu). */
 :root {
   --nuit: #172243; --nuit2: #24315C; --fond: #F4F5F8; --papier: #FFFFFF; --encre: #172243; --doux: #676E86; --trait: #E4E6EE;
   --or: #C49A52; --sable: #F4F0E5; --nov: #D9622B; --hors: #3D5A9E; --vert: #2F7D5B; --ambre: #B7791F; --gris: #8A90A6;
@@ -126,9 +124,8 @@ nav { max-width: 100%; }
 <div id="tiroir" hidden></div>
 
 <script>
-const DEMO = false; // la page « vide » est produite à partir de ce même fichier avec DEMO = false
+const DEMO = false;
 
-// Les lieux de la mission (brief GEM, octobre 2026)
 const LIEUX = [
   { id: "fdv", nom: "Fort de Vaise", photo: "lieux/fdv.jpg", capa: "Jusqu'à 300 personnes · terrasse panoramique", zone: "Lyon 9e, Techlid, Ouest lyonnais", adresse: "adresse du Fort de Vaise" },
   { id: "fdf", nom: "Fort de Feyzin", photo: "lieux/fdf.jpg", capa: "Jusqu'à 1 000 personnes · 26 ha de forêt, Théâtre de Verdure", zone: "Vallée de la chimie, Gerland, Saint-Priest, Corbas, Vénissieux, Saint-Fons", adresse: "adresse du Fort de Feyzin" },
@@ -140,7 +137,6 @@ const CANAUX_HORS = ["Formulaire du site", "Mail direct", "Réponse à une plaqu
 const FORMATS = ["Séminaire", "Soirée d'entreprise", "Plénière", "Convention", "Journée de cohésion", "Cocktail", "Vœux"];
 const MOIS = ["Mois 1", "Mois 2", "Mois 3"];
 
-// ---- Données de démonstration, toutes fictives ----
 let graine = 11;
 const alea = () => (graine = (graine * 16807) % 2147483647) / 2147483647;
 const pick = a => a[Math.floor(alea() * a.length)];
@@ -163,7 +159,6 @@ if (DEMO) {
 }
 const SIGNES_DECLARES = DEMO ? { fdv: [0, 1, 2], fdf: [0, 1, 1], iac: [0, 0, 2] } : { fdv: [0, 0, 0], fdf: [0, 0, 0], iac: [0, 0, 0] };
 
-// ---- Outils ----
 const etat = { vue: "ensemble", mois: "tous", lieu: "tous" };
 const filtre = () => DEMANDES.filter(d => (etat.mois === "tous" || d.mois === Number(etat.mois)) && (etat.lieu === "tous" || d.lieu === etat.lieu));
 const somme = (a, f) => a.reduce((s, x) => s + f(x), 0);
