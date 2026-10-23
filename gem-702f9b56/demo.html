@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex, nofollow">
+<title>Pilotage GEM</title>
+
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap">
+<style>
+img{max-width:100%}[hidden]{display:none!important}
+
+/* Outil aux couleurs de GEM : barre bleu nuit, plan de travail clair, deux couleurs d'origine (Novyance en orange, hors Novyance en bleu). */
+:root {
+  --nuit: #172243; --nuit2: #24315C; --fond: #F4F5F8; --papier: #FFFFFF; --encre: #172243; --doux: #676E86; --trait: #E4E6EE;
+  --or: #C49A52; --sable: #F4F0E5; --nov: #D9622B; --hors: #3D5A9E; --vert: #2F7D5B; --ambre: #B7791F; --gris: #8A90A6;
+  --barre-texte: #F4F0E5;
+  --titre: "Outfit", "Jost", "Helvetica Neue", Arial, sans-serif; --texte: "Jost", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --fond: #0F1426; --papier: #182038; --encre: #ECE7DA; --doux: #A3A9BF; --trait: #2C3555; --sable: #1F2742; --nov: #F08A55; --hors: #8FA8E6; --vert: #5FB98F; --ambre: #E0A64B; color-scheme: dark } }
+:root[data-theme="dark"] { --fond: #0F1426; --papier: #182038; --encre: #ECE7DA; --doux: #A3A9BF; --trait: #2C3555; --sable: #1F2742; --nov: #F08A55; --hors: #8FA8E6; --vert: #5FB98F; --ambre: #E0A64B; color-scheme: dark }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--fond); color: var(--encre); font: 15px/1.5 var(--texte); }
+.app { display: grid; grid-template-columns: 232px 1fr; min-height: 100vh; }
+aside { background: var(--nuit); color: var(--barre-texte); padding: 22px 14px; display: flex; flex-direction: column; gap: 22px; position: sticky; top: 0; height: 100vh; }
+.logo { display: flex; align-items: center; gap: 10px; padding: 0 8px; }
+.logo .carre { border: 1.5px solid currentColor; width: 40px; height: 40px; display: grid; place-items: center; font-weight: 600; font-size: 13px; line-height: 1; text-align: center; }
+.logo small { display: block; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: .75; }
+nav { display: grid; gap: 2px; }
+nav button { all: unset; cursor: pointer; padding: 9px 12px; border-radius: 8px; font-size: 14.5px; color: var(--barre-texte); opacity: .78; display: flex; justify-content: space-between; gap: 8px; }
+nav button:hover { opacity: 1; background: rgba(255,255,255,.06); }
+nav button[aria-current="page"] { opacity: 1; background: rgba(255,255,255,.12); }
+nav button:focus-visible { outline: 2px solid var(--or); }
+.compte { background: var(--or); color: #172243; font-size: 11px; font-weight: 700; border-radius: 99px; padding: 1px 7px; }
+.note-barre { margin-top: auto; font-size: 12px; opacity: .72; padding: 0 8px; line-height: 1.45; }
+main { padding-block: 26px 60px; padding-left: max(16px, min(40px, 4vw)); padding-right: max(16px, min(40px, 4vw)); min-width: 0; }
+.entete { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: end; justify-content: space-between; margin-bottom: 16px; }
+h1 { font: 600 clamp(26px, 3.4vw, 34px)/1.1 var(--titre); margin: 0; letter-spacing: -.01em; }
+.entete p { margin: 4px 0 0; color: var(--doux); }
+select { font: inherit; font-size: 14px; padding: 7px 10px; border-radius: 8px; border: 1px solid var(--trait); background: var(--papier); color: var(--encre); }
+.bandeau { border-radius: 10px; padding: 9px 14px; font-size: 13.5px; margin-bottom: 18px; }
+.bandeau.demo { background: #FFF4E5; color: #7A4A00; border: 1px solid #F0C98A; }
+.bandeau.vide { background: var(--papier); color: var(--doux); border: 1px dashed var(--trait); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .bandeau.demo { background: #3A2A12; color: #F3D39A; border-color: #6B4E1E; } }
+:root[data-theme="dark"] .bandeau.demo { background: #3A2A12; color: #F3D39A; border-color: #6B4E1E; }
+.hero { border-radius: 14px; min-height: 170px; background-size: cover; background-position: center 45%; display: flex; align-items: flex-end; padding: 20px 24px; margin-bottom: 18px; color: #fff; position: relative; overflow: hidden; }
+.hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(23,34,67,.05) 15%, rgba(23,34,67,.85)); }
+.hero > * { position: relative; }
+.hero h1 { color: #fff; font-size: clamp(26px, 3.4vw, 38px); }
+.hero p { margin: 4px 0 0; opacity: .9; }
+.chiffres { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.chiffre { background: var(--papier); border: 1px solid var(--trait); border-radius: 12px; padding: 14px 16px; min-width: 0; }
+.chiffre span { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--doux); }
+.chiffre b { display: block; font: 600 28px/1.2 var(--titre); font-variant-numeric: tabular-nums; margin-top: 2px; }
+.chiffre em { font-style: normal; font-size: 13px; color: var(--doux); }
+.chiffre.nov { border-top: 3px solid var(--nov); } .chiffre.hors { border-top: 3px solid var(--hors); }
+.grille { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; }
+.grille > * { min-width: 0; }
+.panneau { background: var(--papier); border: 1px solid var(--trait); border-radius: 12px; padding: 16px 18px; min-width: 0; }
+.panneau h2 { font: 600 18px/1.25 var(--titre); margin: 0 0 4px; }
+.sous { color: var(--doux); font-size: 13.5px; margin: 0 0 12px; }
+.barres { display: grid; gap: 12px; }
+.barre { display: grid; grid-template-columns: 170px 1fr 54px; gap: 10px; align-items: center; font-size: 14px; }
+.rail { height: 14px; background: var(--sable); border-radius: 99px; overflow: hidden; display: flex; }
+.rail i { display: block; height: 100%; }
+.barre b { text-align: right; font-variant-numeric: tabular-nums; }
+.legende { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--doux); margin-top: 10px; }
+.legende i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+.tableau { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 620px; }
+th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--trait); white-space: nowrap; }
+th { white-space: normal; vertical-align: bottom; }
+th { font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--doux); font-weight: 600; }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+tr.total td { font-weight: 600; border-top: 2px solid var(--trait); }
+tbody tr.clic { cursor: pointer; } tbody tr.clic:hover { background: var(--sable); }
+.pastille { display: inline-block; border-radius: 99px; padding: 1px 9px; font-size: 12.5px; font-weight: 500; border: 1px solid currentColor; }
+.o-nov { color: var(--nov); } .o-hors { color: var(--hors); }
+.s-nouvelle { color: var(--hors); } .s-qualifiee { color: var(--ambre); } .s-transmise { color: var(--vert); } .s-sanssuite { color: var(--gris); }
+.lieux { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 14px; }
+.lieu { background: var(--papier); border: 1px solid var(--trait); border-radius: 12px; overflow: hidden; display: grid; min-width: 0; }
+.lieu img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+.lieu .corps { padding: 14px 16px; display: grid; gap: 8px; }
+.lieu h3 { font: 600 19px/1.2 var(--titre); margin: 0; }
+.lieu .info { color: var(--doux); font-size: 13px; }
+.lieu dl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 0; }
+.lieu dt { font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--doux); }
+.lieu dd { margin: 0; font: 600 19px var(--titre); font-variant-numeric: tabular-nums; }
+.vide-etat { text-align: center; padding: 34px 18px; color: var(--doux); }
+.vide-etat b { display: block; color: var(--encre); font: 600 17px var(--titre); margin-bottom: 4px; }
+.etapes { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.etapes div { background: var(--papier); border: 1px solid var(--trait); border-top: 3px solid var(--or); border-radius: 10px; padding: 12px 14px; font-size: 14px; }
+.etapes b { display: block; font: 600 15px var(--titre); }
+.tiroir { position: fixed; inset: 0 0 0 auto; width: min(440px, 100%); background: var(--papier); border-left: 1px solid var(--trait); box-shadow: -12px 0 30px rgba(0,0,0,.15); padding: 22px; padding-top: calc(22px + env(safe-area-inset-top, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); overflow-y: auto; z-index: 10; }
+.tiroir h2 { font: 600 22px/1.2 var(--titre); margin: 0 0 4px; }
+.fil { display: grid; margin-top: 14px; border-left: 2px solid var(--trait); padding-left: 16px; }
+.fil div { position: relative; padding: 0 0 14px; font-size: 14px; }
+.fil div::before { content: ""; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--or); }
+.fil small { display: block; color: var(--doux); }
+.bouton { font: inherit; font-size: 13.5px; border: 1px solid var(--trait); background: transparent; color: var(--encre); border-radius: 8px; padding: 6px 12px; cursor: pointer; }
+.fermer { position: absolute; top: calc(14px + env(safe-area-inset-top, 0px)); right: max(14px, env(safe-area-inset-right, 0px)); }
+@media (max-width: 860px) {
+  .app { grid-template-columns: 1fr; }
+  aside { position: static; height: auto; padding: 14px; padding-left: max(14px, env(safe-area-inset-left, 0px)); padding-right: max(14px, env(safe-area-inset-right, 0px)); gap: 12px; }
+  nav { grid-auto-flow: column; overflow-x: auto; } nav button { white-space: nowrap; }
+  .note-barre { display: none; } .grille { grid-template-columns: 1fr; }
+  .barre { grid-template-columns: 120px 1fr 44px; }
+}
+</style>
+</head><body>
+
+<div class="app">
+  <aside>
+    <div class="logo"><div class="carre">G<br>EM</div><div>Pilotage<small>Groupe Event Management</small></div></div>
+    <nav id="menu" aria-label="Écrans">
+      <button data-vue="ensemble" aria-current="page">Vue d'ensemble</button>
+      <button data-vue="demandes">Demandes <span class="compte" id="nb"></span></button>
+      <button data-vue="prospection">Prospection Novyance</button>
+      <button data-vue="reporting">Reporting du mois</button>
+      <button data-vue="lieux">Les 3 lieux</button>
+      <button data-vue="fonctionnement">Comment ça marche</button>
+    </nav>
+    <p class="note-barre" id="note-barre"></p>
+  </aside>
+  <main id="ecran"></main>
+</div>
+<div id="tiroir" hidden></div>
+
+<script>
+const DEMO = true; // la page « vide » est produite à partir de ce même fichier avec DEMO = false
+
+// Les lieux de la mission (brief GEM, octobre 2026)
+const LIEUX = [
+  { id: "fdv", nom: "Fort de Vaise", photo: "lieux/fdv.jpg", capa: "Jusqu'à 300 personnes · terrasse panoramique", zone: "Lyon 9e, Techlid, Ouest lyonnais", adresse: "adresse du Fort de Vaise" },
+  { id: "fdf", nom: "Fort de Feyzin", photo: "lieux/fdf.jpg", capa: "Jusqu'à 1 000 personnes · 26 ha de forêt, Théâtre de Verdure", zone: "Vallée de la chimie, Gerland, Saint-Priest, Corbas, Vénissieux, Saint-Fons", adresse: "adresse du Fort de Feyzin" },
+  { id: "iac", nom: "Institut d'art contemporain", photo: "lieux/iac.jpg", capa: "Jusqu'à 300 personnes en plénière · Villeurbanne", zone: "Villeurbanne, Part-Dieu, La Doua", adresse: "adresse de l'IAC" },
+];
+const L = id => LIEUX.find(l => l.id === id);
+const STATUTS = { nouvelle: "Nouvelle", qualifiee: "Qualifiée", transmise: "Transmise au chef de projet", sanssuite: "Sans suite" };
+const CANAUX_HORS = ["Formulaire du site", "Mail direct", "Réponse à une plaquette", "Plateforme de lieux"];
+const FORMATS = ["Séminaire", "Soirée d'entreprise", "Plénière", "Convention", "Journée de cohésion", "Cocktail", "Vœux"];
+const MOIS = ["Mois 1", "Mois 2", "Mois 3"];
+
+// ---- Données de démonstration, toutes fictives ----
+let graine = 11;
+const alea = () => (graine = (graine * 16807) % 2147483647) / 2147483647;
+const pick = a => a[Math.floor(alea() * a.length)];
+const NOMS = ["Groupe Vernay", "Sopral Industrie", "Lumen Conseil", "Banque Rhodanienne", "Brevia Logiciels", "Nexo Pharma", "Kerys Énergie", "Orbis Assurances", "Fiducia Lyon", "Vitalys Santé", "Celsa Transports", "Galien Labo", "Novatek", "Cap Horizon RH", "Hexa Data", "Arpège Formation", "Quartz Ingénierie", "Chimirhône", "Université Démo", "Laboratoire Démo", "Logistique Saint-Priest (démo)", "Collectivité Démo"];
+const ROLES = ["Assistante de direction", "Office manager", "Responsable communication", "Services généraux", "Direction RH"];
+const DEMANDES = [], CONTACTS = [];
+if (DEMO) {
+  for (let i = 0; i < 64; i++) {
+    const mois = Math.floor(alea() * 3), lieu = pick(LIEUX).id, nov = alea() < .42;
+    const r = alea();
+    const statut = mois < 2 ? (r < .55 ? "transmise" : r < .8 ? "sanssuite" : "qualifiee") : (r < .35 ? "nouvelle" : r < .7 ? "qualifiee" : "transmise");
+    DEMANDES.push({ id: 100 + i, mois, jour: 1 + Math.floor(alea() * 27), lieu, nov, canal: nov ? "Réponse à la prospection" : pick(CANAUX_HORS), format: pick(FORMATS), pers: [20, 40, 60, 80, 120, 200, 300, 500][Math.floor(alea() * 8)], societe: pick(NOMS), role: pick(ROLES), statut });
+  }
+  DEMANDES.sort((a, b) => b.mois - a.mois || b.jour - a.jour);
+  const base = { fdv: [120, 130, 140], fdf: [100, 120, 130], iac: [90, 110, 120] };
+  for (const l of LIEUX) for (let m = 0; m < 3; m++) {
+    const envoyes = base[l.id][m];
+    CONTACTS.push({ lieu: l.id, mois: m, envoyes, reponses: Math.round(envoyes * (.07 + alea() * .04)), rdv: Math.round(envoyes * (.025 + alea() * .02)) });
+  }
+}
+const SIGNES_DECLARES = DEMO ? { fdv: [0, 1, 2], fdf: [0, 1, 1], iac: [0, 0, 2] } : { fdv: [0, 0, 0], fdf: [0, 0, 0], iac: [0, 0, 0] };
+
+// ---- Outils ----
+const etat = { vue: "ensemble", mois: "tous", lieu: "tous" };
+const filtre = () => DEMANDES.filter(d => (etat.mois === "tous" || d.mois === Number(etat.mois)) && (etat.lieu === "tous" || d.lieu === etat.lieu));
+const somme = (a, f) => a.reduce((s, x) => s + f(x), 0);
+const origine = d => `<span class="pastille ${d.nov ? "o-nov" : "o-hors"}">${d.nov ? "Novyance" : "Hors Novyance"}</span>`;
+const statut = s => `<span class="pastille s-${s}">${STATUTS[s]}</span>`;
+function filtres(avecMois = true) {
+  return `<div style="display:flex;gap:8px;flex-wrap:wrap">${avecMois ? `<select id="f-mois" aria-label="Période"><option value="tous">Les 3 mois</option>${MOIS.map((m, i) => `<option value="${i}" ${etat.mois === String(i) ? "selected" : ""}>${m}</option>`).join("")}</select>` : ""}
+    <select id="f-lieu" aria-label="Lieu"><option value="tous">Les 3 lieux</option>${LIEUX.map(l => `<option value="${l.id}" ${etat.lieu === l.id ? "selected" : ""}>${l.nom}</option>`).join("")}</select></div>`;
+}
+const bandeau = DEMO
+  ? `<div class="bandeau demo"><b>Données fictives.</b> Cette version sert à montrer à quoi ressemblera le pilotage. Les entreprises, demandes et chiffres sont inventés.</div>`
+  : `<div class="bandeau vide">Le pilotage démarre à zéro. Il se remplira tout seul dès que les trois adresses des lieux seront branchées.</div>`;
+const entete = (t, s, f = true, m = true) => `<div class="entete"><div><h1>${t}</h1><p>${s}</p></div>${f ? filtres(m) : ""}</div>${bandeau}`;
+const vide = (t, s) => `<div class="vide-etat"><b>${t}</b>${s}</div>`;
+
+const VUES = {
+  ensemble() {
+    const d = filtre(), nov = d.filter(x => x.nov), hors = d.filter(x => !x.nov), trans = d.filter(x => x.statut === "transmise");
+    const max = Math.max(1, ...LIEUX.map(l => d.filter(x => x.lieu === l.id).length));
+    return `<div class="hero" style="background-image:url(lieux/fdv.jpg)"><div><h1>Bonjour Guillaume</h1><p>Ce qui vient de Novyance, et ce qui n'en vient pas, sur vos trois lieux.</p></div></div>` + entete("Vue d'ensemble", "Toutes les demandes reçues sur les adresses des trois lieux.") + `
+    <div class="chiffres">
+      <div class="chiffre"><span>Demandes reçues</span><b>${d.length}</b><em>sur les 3 adresses</em></div>
+      <div class="chiffre nov"><span>Via Novyance</span><b>${nov.length}</b><em>${d.length ? Math.round(nov.length / d.length * 100) : 0} % des demandes</em></div>
+      <div class="chiffre hors"><span>Hors Novyance</span><b>${hors.length}</b><em>site, mails directs, plateformes</em></div>
+      <div class="chiffre"><span>Transmises aux chefs de projet</span><b>${trans.length}</b><em>dont ${trans.filter(x => x.nov).length} via Novyance</em></div>
+    </div>
+    <div class="grille">
+      <section class="panneau"><h2>Par lieu</h2><p class="sous">Demandes reçues, Novyance et hors Novyance.</p>
+        ${d.length ? `<div class="barres">${LIEUX.map(l => { const dl = d.filter(x => x.lieu === l.id), n = dl.filter(x => x.nov).length; return `<div class="barre"><span>${l.nom}</span><div class="rail"><i style="width:${n / max * 100}%;background:var(--nov)"></i><i style="width:${(dl.length - n) / max * 100}%;background:var(--hors)"></i></div><b>${dl.length}</b></div>`; }).join("")}</div>
+        <div class="legende"><span><i style="background:var(--nov)"></i>Novyance</span><span><i style="background:var(--hors)"></i>Hors Novyance</span></div>` : vide("Aucune demande pour l'instant", "Les demandes des trois adresses apparaîtront ici.")}
+      </section>
+      <section class="panneau"><h2>Mois par mois</h2><p class="sous">Demandes reçues, et la part Novyance.</p>
+        ${DEMANDES.length ? `<div class="barres">${MOIS.map((m, i) => { const dm = DEMANDES.filter(x => x.mois === i && (etat.lieu === "tous" || x.lieu === etat.lieu)), n = dm.filter(x => x.nov).length, mx = 30; return `<div class="barre"><span>${m}</span><div class="rail"><i style="width:${Math.min(100, n / mx * 100)}%;background:var(--nov)"></i><i style="width:${Math.min(100, (dm.length - n) / mx * 100)}%;background:var(--hors)"></i></div><b>${dm.length}</b></div>`; }).join("")}</div>` : vide("Le premier mois commence au branchement", "Chaque mois s'ajoutera ici.")}
+      </section>
+    </div>`;
+  },
+  demandes() {
+    const d = filtre();
+    return entete("Demandes", "Chaque demande arrivée sur une des trois adresses, avec son origine. Cliquez sur une ligne pour voir son historique.") + `
+    <section class="panneau tableau">${d.length ? `<table><thead><tr><th>Reçue</th><th>Lieu</th><th>Entreprise</th><th>Qui</th><th>Format</th><th class="n">Pers.</th><th>Origine</th><th>Statut</th></tr></thead>
+      <tbody>${d.map(x => `<tr class="clic" data-id="${x.id}" tabindex="0"><td>${MOIS[x.mois]}, j${x.jour}</td><td>${L(x.lieu).nom}</td><td>${x.societe}</td><td>${x.role}</td><td>${x.format}</td><td class="n">${x.pers}</td><td>${origine(x)}</td><td>${statut(x.statut)}</td></tr>`).join("")}</tbody></table>`
+      : vide("Aucune demande pour l'instant", "Dès que les trois adresses seront branchées, chaque demande arrivera ici, classée Novyance ou hors Novyance.")}</section>`;
+  },
+  prospection() {
+    const c = CONTACTS.filter(x => (etat.mois === "tous" || x.mois === Number(etat.mois)) && (etat.lieu === "tous" || x.lieu === etat.lieu));
+    const env = somme(c, x => x.envoyes), rep = somme(c, x => x.reponses), rdv = somme(c, x => x.rdv);
+    const dev = filtre().filter(x => x.nov && x.statut === "transmise").length;
+    return entete("Prospection Novyance", "Les entreprises contactées depuis les adresses des lieux, et ce que ça donne.") + `
+    <div class="chiffres">
+      <div class="chiffre nov"><span>Contacts établis</span><b>${env}</b><em>entreprises contactées</em></div>
+      <div class="chiffre nov"><span>Réponses</span><b>${rep}</b><em>${env ? Math.round(rep / env * 100) : 0} % des contacts</em></div>
+      <div class="chiffre nov"><span>Rendez-vous obtenus</span><b>${rdv}</b></div>
+      <div class="chiffre nov"><span>Demandes de devis transmises</span><b>${dev}</b><em>aux chefs de projet</em></div>
+    </div>
+    <section class="panneau tableau"><h2>Par lieu</h2><p class="sous">Zone : entreprises à moins de 20 minutes de chaque lieu.</p>
+      <table><thead><tr><th>Lieu</th><th>Zone</th><th class="n">Contacts</th><th class="n">Réponses</th><th class="n">Rendez-vous</th></tr></thead><tbody>
+      ${LIEUX.filter(l => etat.lieu === "tous" || etat.lieu === l.id).map(l => { const cl = c.filter(x => x.lieu === l.id); return `<tr><td><b>${l.nom}</b></td><td style="white-space:normal">${l.zone}</td><td class="n">${somme(cl, x => x.envoyes)}</td><td class="n">${somme(cl, x => x.reponses)}</td><td class="n">${somme(cl, x => x.rdv)}</td></tr>`; }).join("")}
+      </tbody></table></section>`;
+  },
+  reporting() {
+    const mi = etat.mois === "tous" ? null : Number(etat.mois);
+    const ligne = l => {
+      const c = CONTACTS.filter(x => x.lieu === l.id && (mi === null || x.mois === mi));
+      const d = DEMANDES.filter(x => x.lieu === l.id && (mi === null || x.mois === mi));
+      const sig = mi === null ? somme(SIGNES_DECLARES[l.id], x => x) : SIGNES_DECLARES[l.id][mi];
+      return { nom: l.nom, contacts: somme(c, x => x.envoyes), rdv: somme(c, x => x.rdv), devisNov: d.filter(x => x.nov && x.statut === "transmise").length, hors: d.filter(x => !x.nov).length, sig };
+    };
+    const lignes = LIEUX.filter(l => etat.lieu === "tous" || etat.lieu === l.id).map(ligne);
+    const t = k => somme(lignes, x => x[k]);
+    return entete("Reporting du mois", "Le point mensuel, lieu par lieu : ce que vous avez demandé dans le brief.") + `
+    <section class="panneau tableau"><table>
+      <thead><tr><th>Lieu</th><th class="n">Contacts établis</th><th class="n">Rendez-vous obtenus</th><th class="n">Demandes de devis (Novyance)</th><th class="n">Demandes hors Novyance</th><th class="n">Événements signés déclarés par GEM</th></tr></thead>
+      <tbody>${lignes.map(x => `<tr><td><b>${x.nom}</b></td><td class="n">${x.contacts}</td><td class="n">${x.rdv}</td><td class="n">${x.devisNov}</td><td class="n">${x.hors}</td><td class="n">${x.sig}</td></tr>`).join("")}
+      <tr class="total"><td>Total</td><td class="n">${t("contacts")}</td><td class="n">${t("rdv")}</td><td class="n">${t("devisNov")}</td><td class="n">${t("hors")}</td><td class="n">${t("sig")}</td></tr></tbody>
+    </table></section>
+    <section class="panneau" style="margin-top:16px"><h2>La dernière colonne</h2><p class="sous" style="margin:0">Une fois la demande transmise, c'est votre chef de projet qui suit le client. Chaque mois, GEM indique ici les événements signés avec une entreprise contactée par Novyance. C'est la base de la facturation prévue au contrat.</p></section>`;
+  },
+  lieux() {
+    return entete("Les 3 lieux de la mission", "Une zone de prospection par lieu, des entreprises à moins de 20 minutes.", false) + `
+    <div class="lieux">${LIEUX.map(l => { const d = DEMANDES.filter(x => x.lieu === l.id); return `<article class="lieu"><img src="${l.photo}" alt="${l.nom}" loading="lazy"><div class="corps"><h3>${l.nom}</h3><div class="info">${l.capa}</div><div class="info"><b>Zone :</b> ${l.zone}</div>
+      <dl><div><dt>Demandes</dt><dd>${d.length}</dd></div><div><dt>Novyance</dt><dd>${d.filter(x => x.nov).length}</dd></div><div><dt>Transmises</dt><dd>${d.filter(x => x.statut === "transmise").length}</dd></div></dl></div></article>`; }).join("")}</div>`;
+  },
+  fonctionnement() {
+    return entete("Comment ça marche", "Le chemin d'une demande, de la prospection au chef de projet.", false) + `
+    <div class="etapes">
+      <div><b>1. Les trois adresses</b>Une adresse par lieu reçoit toutes les demandes entrantes. Le pilotage les lit, en lecture seule.</div>
+      <div><b>2. La prospection</b>Novyance écrit aux entreprises de chaque zone depuis l'adresse du lieu, avec des messages validés par GEM.</div>
+      <div><b>3. Le tri automatique</b>Une réponse à un mail de prospection est classée <b style="display:inline;color:var(--nov)">Novyance</b>. Tout le reste est classé <b style="display:inline;color:var(--hors)">hors Novyance</b>.</div>
+      <div><b>4. La transmission</b>Une demande qualifiée part chez le chef de projet GEM, qui prend le relais.</div>
+      <div><b>5. Le point mensuel</b>Contacts, rendez-vous et demandes de devis par lieu, et les événements signés déclarés par GEM.</div>
+    </div>
+    <section class="panneau" style="margin-top:16px"><h2>Confidentialité</h2><p class="sous" style="margin:0">Les données restent la propriété de GEM, ne servent qu'à cette mission et sont supprimées à son terme. Aucun message n'est envoyé au nom de GEM sans validation.</p></section>`;
+  },
+};
+
+function ouvre(id) {
+  const x = DEMANDES.find(d => d.id === Number(id)); if (!x) return;
+  const pas = [[`${MOIS[x.mois]}, j${x.jour}`, x.nov ? "Réponse à un mail de prospection Novyance" : `Demande entrante : ${x.canal.toLowerCase()}`, `${x.role}, ${x.societe}`]];
+  if (x.statut !== "nouvelle") pas.push([`${MOIS[x.mois]}, j${Math.min(28, x.jour + 1)}`, "Qualifiée", `${x.format}, ${x.pers} personnes, ${L(x.lieu).nom}`]);
+  if (x.statut === "transmise") pas.push([`${MOIS[x.mois]}, j${Math.min(28, x.jour + 2)}`, "Transmise au chef de projet", "Le suivi continue chez GEM"]);
+  if (x.statut === "sanssuite") pas.push([`${MOIS[x.mois]}, j${Math.min(28, x.jour + 6)}`, "Sans suite", "Pas de projet pour l'instant"]);
+  const t = document.getElementById("tiroir");
+  t.innerHTML = `<div class="tiroir" role="dialog" aria-label="Demande ${x.societe}"><button class="bouton fermer" id="fermer">Fermer</button>
+    <h2>${x.societe}</h2><p class="sous">${x.format} · ${x.pers} personnes · ${L(x.lieu).nom}</p><p>${origine(x)} ${statut(x.statut)}</p>
+    <div class="fil">${pas.map(p => `<div><b>${p[1]}</b><small>${p[0]} · ${p[2]}</small></div>`).join("")}</div></div>`;
+  t.hidden = false; document.getElementById("fermer").focus();
+}
+document.addEventListener("click", e => {
+  const r = e.target.closest("tr.clic"); if (r) return ouvre(r.dataset.id);
+  if (e.target.id === "fermer") document.getElementById("tiroir").hidden = true;
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") document.getElementById("tiroir").hidden = true;
+  if (e.key === "Enter" && e.target.matches("tr.clic")) ouvre(e.target.dataset.id);
+});
+document.addEventListener("change", e => {
+  if (e.target.id === "f-mois") etat.mois = e.target.value;
+  if (e.target.id === "f-lieu") etat.lieu = e.target.value;
+  montre(etat.vue);
+});
+function montre(v) {
+  etat.vue = v;
+  document.querySelectorAll("#menu button").forEach(b => b.dataset.vue === v ? b.setAttribute("aria-current", "page") : b.removeAttribute("aria-current"));
+  document.getElementById("ecran").innerHTML = VUES[v]();
+}
+document.getElementById("menu").addEventListener("click", e => { const b = e.target.closest("button"); if (b) montre(b.dataset.vue); });
+const nouvelles = DEMANDES.filter(x => x.statut === "nouvelle").length;
+const nb = document.getElementById("nb"); if (nouvelles) nb.textContent = nouvelles; else nb.remove();
+document.getElementById("note-barre").textContent = DEMO ? "Version de démonstration : toutes les données sont fictives." : "Version de départ : aucune donnée pour l'instant.";
+const ancre = location.hash.slice(1); montre(VUES[ancre] ? ancre : "ensemble");
+</script>
+
+</body></html>

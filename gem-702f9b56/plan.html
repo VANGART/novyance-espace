@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex, nofollow">
+<title>Plan de prospection GEM</title>
+
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap">
+<style>
+img{max-width:100%}[hidden]{display:none!important}
+
+/* Document de travail aux couleurs de GEM : bandeau bleu nuit, colonne de lecture crème, tableaux de règles et une frise des trois mois. */
+:root {
+  --nuit: #172243; --creme: #F4F5F8; --papier: #FFFFFF; --encre: #172243; --doux: #5F6680; --trait: #E4E6EE; --or: #B88A3E; --vert: #2F7D5B;
+  --titre: "Outfit", "Jost", Arial, sans-serif; --texte: "Jost", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --creme: #12182C; --papier: #1A2139; --encre: #ECE7DA; --doux: #A3A9BF; --trait: #2C3555; --or: #D3A65A; --vert: #5FB98F; color-scheme: dark } }
+:root[data-theme="dark"] { --creme: #12182C; --papier: #1A2139; --encre: #ECE7DA; --doux: #A3A9BF; --trait: #2C3555; --or: #D3A65A; --vert: #5FB98F; color-scheme: dark }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--creme); color: var(--encre); font: 16px/1.6 var(--texte); }
+.haut { background: var(--nuit); color: #E9E4D6; }
+.haut .dedans, main { max-width: 980px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.haut .dedans { padding-block: 34px 30px; display: grid; gap: 10px; }
+.marque { display: flex; gap: 10px; align-items: center; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; opacity: .85; }
+.marque b { border: 1.5px solid currentColor; width: 34px; height: 34px; display: grid; place-items: center; font-size: 11px; line-height: 1; text-align: center; letter-spacing: .04em; }
+h1 { font: 600 clamp(30px, 5vw, 46px)/1.1 var(--titre); letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+.haut p { margin: 0; max-width: 64ch; opacity: .85; }
+main { padding-block: 34px 70px; display: grid; gap: 44px; }
+section { display: grid; gap: 14px; }
+h2 { font: 600 26px/1.2 var(--titre); margin: 0; text-wrap: balance; }
+h3 { font-size: 17px; font-weight: 600; margin: 0; }
+p { margin: 0; max-width: 68ch; }
+.doux { color: var(--doux); }
+.etiquette { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--or); font-weight: 600; }
+.panneau { background: var(--papier); border: 1px solid var(--trait); border-radius: 12px; padding: 18px 20px; display: grid; gap: 10px; min-width: 0; }
+.quatre { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+.deux { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+.tableau { overflow-x: auto; background: var(--papier); border: 1px solid var(--trait); border-radius: 12px; }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; min-width: 620px; }
+th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--trait); vertical-align: top; }
+th { font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--doux); font-weight: 600; }
+tr:last-child td { border-bottom: 0; }
+td b { font-weight: 600; }
+ul { margin: 0; padding-left: 18px; } li { margin: 4px 0; }
+.sequence { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.pas { background: var(--papier); border: 1px solid var(--trait); border-top: 3px solid var(--or); border-radius: 10px; padding: 14px 16px; display: grid; gap: 6px; }
+.pas .jour { font-weight: 700; font-size: 20px; font-variant-numeric: tabular-nums; }
+.mail { background: var(--papier); border: 1px solid var(--trait); border-radius: 12px; overflow: hidden; }
+.mail .tete { padding: 10px 18px; border-bottom: 1px solid var(--trait); font-size: 13.5px; color: var(--doux); display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.mail .tete b { color: var(--encre); font-weight: 600; }
+.mail .corps { padding: 14px 18px; display: grid; gap: 10px; font-size: 15px; }
+.frise { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.mois { background: var(--papier); border: 1px solid var(--trait); border-radius: 12px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; }
+.mois h3 { font: 600 20px/1.2 var(--titre); }
+.photos { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+.photos figure { margin: 0; display: grid; gap: 4px; font-size: 12.5px; color: var(--doux); }
+.photos img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; display: block; }
+@media (max-width: 760px) { .photos { grid-template-columns: repeat(3, 1fr); } }
+.pastille { display: inline-block; border: 1px solid var(--vert); color: var(--vert); border-radius: 99px; padding: 0 9px; font-size: 12.5px; font-weight: 500; }
+.note { border: 1px dashed var(--or); border-radius: 10px; padding: 10px 14px; color: var(--doux); font-size: 14px; }
+@media (max-width: 760px) { .frise { grid-template-columns: 1fr; } }
+</style>
+</head><body>
+
+<header class="haut"><div class="dedans">
+  <div class="marque"><b>G<br>EM</b> Groupe Event Management × Novyance</div>
+  <h1>Plan de prospection : vos trois lieux phares</h1>
+  <p>Fort de Vaise, Fort de Feyzin, Institut d'art contemporain. Les entreprises à moins de 20 minutes de chaque site, contactées une par une. Document confidentiel, établi d'après votre brief.</p>
+</div></header>
+
+<main>
+  <section>
+    <span class="etiquette">Le principe</span>
+    <h2>Une zone par lieu, des entreprises choisies une par une</h2>
+    <div class="photos" style="grid-template-columns:repeat(3,1fr)">
+      <figure><img src="lieux/fdv.jpg" alt="Fort de Vaise"><figcaption>Fort de Vaise · terrasse panoramique · jusqu'à 300 pers.</figcaption></figure>
+      <figure><img src="lieux/fdf.jpg" alt="Fort de Feyzin"><figcaption>Fort de Feyzin · forêt de 26 ha, Théâtre de Verdure · jusqu'à 1 000 pers.</figcaption></figure>
+      <figure><img src="lieux/iac.jpg" alt="Institut d'art contemporain"><figcaption>IAC · Villeurbanne, près de la Part-Dieu · jusqu'à 300 pers. en plénière</figcaption></figure>
+    </div>
+    <div class="quatre">
+      <div class="panneau"><h3>50 à 100 mails par semaine</h3><p class="doux">Depuis votre adresse GEM, signés de votre nom. Les réponses arrivent chez vous.</p></div>
+      <div class="panneau"><h3>Le lieu le plus proche</h3><p class="doux">Chaque entreprise reçoit le lieu à moins de 20 minutes de chez elle, pas les trois.</p></div>
+      <div class="panneau"><h3>Les bonnes personnes</h3><p class="doux">Assistantes de direction, grands comptes, institutionnels, monde académique.</p></div>
+      <div class="panneau"><h3>Validé par vous</h3><p class="doux">Chaque message et chaque visuel est validé par GEM avant le premier envoi.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <span class="etiquette">Règle 1</span>
+    <h2>Qui on contacte, lieu par lieu</h2>
+    <div class="tableau"><table>
+      <thead><tr><th>Lieu</th><th>Zone (moins de 20 min)</th><th>Qui on vise en priorité</th><th>Événements à proposer</th></tr></thead>
+      <tbody>
+        <tr><td><b>Fort de Vaise</b></td><td>Lyon 9e, Techlid, Ouest lyonnais</td><td>Sièges et PME du 9e et de Techlid, cabinets, écoles</td><td>Séminaires, soirées d'entreprise sur la terrasse, vœux</td></tr>
+        <tr><td><b>Fort de Feyzin</b></td><td>Vallée de la chimie, Gerland, Saint-Priest, Corbas, Vénissieux, Saint-Fons</td><td>Sites industriels et logistiques, grands comptes de la chimie, laboratoires de Gerland</td><td>Conventions, journées de cohésion, soirées d'été, grands formats jusqu'à 1 000</td></tr>
+        <tr><td><b>Institut d'art contemporain</b></td><td>Villeurbanne, Part-Dieu, La Doua</td><td>Sièges de la Part-Dieu, institutions, universités et laboratoires de La Doua</td><td>Plénières, conférences, cocktails dans un cadre culturel</td></tr>
+      </tbody>
+    </table></div>
+    <div class="panneau"><h3>Les personnes à qui on écrit</h3><ul>
+      <li><b>Assistantes de direction et office managers</b> : ce sont elles qui cherchent le lieu.</li>
+      <li><b>Grands comptes</b> : services généraux, communication, ressources humaines.</li>
+      <li><b>Institutionnels</b> : collectivités, administrations, organismes publics.</li>
+      <li><b>Monde académique</b> : universités, grandes écoles, laboratoires de recherche.</li>
+    </ul></div>
+    <div class="panneau"><h3>Qui on ne contacte pas</h3><ul>
+      <li>Les lieux, traiteurs et agences concurrents.</li>
+      <li>Les entreprises avec qui votre équipe est déjà en discussion.</li>
+      <li>Toute personne qui a demandé à ne plus être contactée.</li>
+    </ul></div>
+  </section>
+
+  <section>
+    <span class="etiquette">Règle 2</span>
+    <h2>Ce qu'on met en avant</h2>
+    <div class="deux">
+      <div class="panneau"><h3>Des adresses atypiques, avec une histoire</h3><p class="doux">Deux forts du XIXe siècle et un centre d'art contemporain : une ADN patrimoniale et culturelle que n'a pas une salle de séminaire classique.</p></div>
+      <div class="panneau"><h3>Un seul interlocuteur</h3><p class="doux">Un chef de projet GEM unique accompagne chaque client, du brief au bilan.</p></div>
+      <div class="panneau"><h3>Des références qui rassurent</h3><p class="doux">Ministère de l'Intérieur, Région Auvergne-Rhône-Alpes, Métropole et Ville de Lyon, France Travail, Inserm, et les entreprises déjà présentes sur vos sites.</p></div>
+      <div class="panneau"><h3>Le relais à votre équipe</h3><p class="doux">Dès qu'une demande est qualifiée, elle part chez vous avec tout son contexte : qui, combien, quand, quel lieu.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <span class="etiquette">Règle 3</span>
+    <h2>Le rythme : trois messages au plus</h2>
+    <div class="sequence">
+      <div class="pas"><span class="jour">Jour 0</span><h3>Le premier mail</h3><p class="doux">Court : le lieu proche, une référence, une question facile.</p></div>
+      <div class="pas"><span class="jour">Jour 4</span><h3>La relance</h3><p class="doux">Deux lignes dans le même fil : une photo, une date libre.</p></div>
+      <div class="pas"><span class="jour">Jour 10</span><h3>Le dernier mot</h3><p class="doux">« Ce n'est peut-être pas le bon moment ? »</p></div>
+      <div class="pas"><span class="jour">Réponse</span><h3>Relais à GEM</h3><p class="doux">La demande qualifiée part chez votre équipe.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <span class="etiquette">Règle 4</span>
+    <h2>Les messages, à valider ensemble</h2>
+    <div class="deux">
+      <article class="mail"><div class="tete"><span>Fort de Vaise</span><span>Objet : <b>un fort au-dessus de Vaise</b></span></div><div class="corps">
+        <p>Bonjour,</p><p>Vos équipes sont à quelques minutes du Fort de Vaise : un fort de 1835 sur les hauteurs de Lyon, avec une terrasse panoramique, pour des séminaires et des soirées jusqu'à 300 personnes. Un chef de projet unique s'occupe de tout, du brief au bilan.</p><p>Je vous envoie la plaquette ?</p><p>Guillaume Rac<br>GEM</p></div></article>
+      <article class="mail"><div class="tete"><span>Fort de Feyzin</span><span>Objet : <b>votre convention en forêt</b></span></div><div class="corps">
+        <p>Bonjour,</p><p>À 20 minutes de votre site, le Fort de Feyzin accueille jusqu'à 1 000 personnes dans 26 hectares de forêt, avec un Théâtre de Verdure. La Région Auvergne-Rhône-Alpes et l'Inserm nous ont déjà fait confiance.</p><p>Vous avez un grand rendez-vous d'équipe en préparation ?</p><p>Guillaume Rac<br>GEM</p></div></article>
+      <article class="mail"><div class="tete"><span>IAC</span><span>Objet : <b>une plénière dans un centre d'art</b></span></div><div class="corps">
+        <p>Bonjour,</p><p>À deux pas de la Part-Dieu, l'Institut d'art contemporain de Villeurbanne reçoit vos plénières jusqu'à 300 personnes, au milieu des œuvres. Un cadre qu'on retient, et un seul interlocuteur pour l'organisation.</p><p>Je vous envoie les disponibilités ?</p><p>Guillaume Rac<br>GEM</p></div></article>
+      <article class="mail"><div class="tete"><span>Relance (jour 4)</span><span>Dans le même fil</span></div><div class="corps">
+        <p>Bonjour,</p><p>Je vous joins une photo du lieu. S'il vous faut une date au premier semestre, je peux en bloquer une sans engagement, le temps d'en parler en interne.</p><p>Guillaume</p></div></article>
+    </div>
+    <p class="note">Les références citées sont celles de votre brief. Les dates libres et les photos viennent de vous, jamais inventées. Rien ne part sans votre accord.</p>
+  </section>
+
+  <section>
+    <span class="etiquette">Votre historique</span>
+    <h2>Ce qu'on récupère de l'existant</h2>
+    <div class="deux">
+      <div class="panneau"><h3>La boîte qui reçoit vos demandes</h3><p class="doux">En lecture seule : demandes passées, lieu, format, date, délai de réponse.</p></div>
+      <div class="panneau"><h3>Vos devis et factures</h3><p class="doux">Ce qui a été signé, pour qui, dans quel lieu : de quoi relancer vos anciens clients au bon moment, sans écrire à ceux qui sont déjà en discussion avec votre équipe.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <span class="etiquette">Le reporting</span>
+    <h2>Chaque mois, lieu par lieu</h2>
+    <div class="tableau"><table>
+      <thead><tr><th>Lieu</th><th>Contacts établis</th><th>Rendez-vous obtenus</th><th>Demandes de devis</th></tr></thead>
+      <tbody><tr><td><b>Fort de Vaise</b></td><td>—</td><td>—</td><td>—</td></tr><tr><td><b>Fort de Feyzin</b></td><td>—</td><td>—</td><td>—</td></tr><tr><td><b>IAC</b></td><td>—</td><td>—</td><td>—</td></tr></tbody>
+    </table></div>
+    <p class="doux">Le même tableau, en direct, dans votre pilotage. Point mensuel de 30 minutes pour ajuster les zones, les cibles et les messages.</p>
+  </section>
+
+  <section>
+    <span class="etiquette">Confidentialité</span>
+    <h2>Vos données restent les vôtres</h2>
+    <div class="panneau"><ul>
+      <li>Les données restent la propriété de GEM, servent uniquement à cette mission et sont supprimées à son terme.</li>
+      <li>Tout message ou visuel au nom de GEM est validé par vous avant diffusion.</li>
+      <li>Pendant la mission et les 12 mois suivants, Novyance ne prospecte pour aucun lieu événementiel ni agence concurrente.</li>
+    </ul></div>
+  </section>
+
+  <section>
+    <span class="etiquette">Pour démarrer</span>
+    <h2>Ce qu'il nous faut</h2>
+    <div class="panneau"><ul>
+      <li>L'adresse GEM d'envoi et qui peut la brancher (Microsoft 365).</li>
+      <li>Un accès en lecture seule à la boîte des demandes, et l'export de vos devis et factures.</li>
+      <li>Les plaquettes et photos des trois lieux, et vos dates libres.</li>
+      <li>La personne de votre équipe qui reçoit les demandes qualifiées.</li>
+    </ul></div>
+  </section>
+</main>
+
+</body></html>
