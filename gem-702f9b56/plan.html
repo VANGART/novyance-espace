@@ -57,6 +57,9 @@ ul { margin: 0; padding-left: 18px; } li { margin: 4px 0; }
 .pastille { display: inline-block; border: 1px solid var(--vert); color: var(--vert); border-radius: 99px; padding: 0 9px; font-size: 12.5px; font-weight: 500; }
 .note { border: 1px dashed var(--or); border-radius: 10px; padding: 10px 14px; color: var(--doux); font-size: 14px; }
 @media (max-width: 760px) { .frise { grid-template-columns: 1fr; } }
+main > section, section > * { min-width: 0; }
+.photos figure { min-width: 0; }
+@media (max-width: 760px) { .photos { grid-template-columns: 1fr !important; } }
 </style>
 </head><body>
 
@@ -120,13 +123,20 @@ ul { margin: 0; padding-left: 18px; } li { margin: 4px 0; }
 
   <section>
     <span class="etiquette">Règle 3</span>
-    <h2>Le rythme : trois messages au plus</h2>
+    <h2>Le rythme : espacé, pour ne jamais paraître insistant</h2>
+    <p class="doux">Trois messages au plus par cycle, puis une reprise au moment où vos clients préparent leurs événements. Calé sur les études de prospection B2B les plus récentes et sur les délais de réservation des séminaires.</p>
     <div class="sequence">
-      <div class="pas"><span class="jour">Jour 0</span><h3>Le premier mail</h3><p class="doux">Court : le lieu proche, une référence, une question facile.</p></div>
-      <div class="pas"><span class="jour">Jour 4</span><h3>La relance</h3><p class="doux">Deux lignes dans le même fil : une photo, une date libre.</p></div>
-      <div class="pas"><span class="jour">Jour 10</span><h3>Le dernier mot</h3><p class="doux">« Ce n'est peut-être pas le bon moment ? »</p></div>
-      <div class="pas"><span class="jour">Réponse</span><h3>Relais à GEM</h3><p class="doux">La demande qualifiée part chez votre équipe.</p></div>
+      <div class="pas"><span class="jour">Jour 0</span><h3>Le premier mail</h3><p class="doux">Du mardi au jeudi, entre 8 h 30 et 10 h 30. Court : le lieu proche, un fait précis, une question simple.</p></div>
+      <div class="pas"><span class="jour">Jour 7</span><h3>Une information utile</h3><p class="doux">Dans le même fil : deux ou trois dates encore libres, ou une photo du lieu en séminaire. Jamais « je reviens vers vous ».</p></div>
+      <div class="pas"><span class="jour">Jour 21</span><h3>Une invitation</h3><p class="doux">Visiter le lieu, ou un événement comparable déjà accueilli. Une question ouverte, puis le cycle s'arrête.</p></div>
+      <div class="pas"><span class="jour">2 à 3 mois</span><h3>La relance de saison</h3><p class="doux">Un nouveau message, lié au calendrier : les séminaires de juin et de la rentrée se réservent en janvier, les soirées de décembre dès mai.</p></div>
     </div>
+    <div class="panneau"><h3>Les règles qui vont avec</h3><ul>
+      <li>Dès qu'une personne répond, tout s'arrête : la demande part chez votre équipe.</li>
+      <li>Une personne qui dit « stop » à un lieu n'est plus contactée par aucun lieu du groupe.</li>
+      <li>Pas d'envoi du 15 décembre au 5 janvier, ni de mi-juillet à fin août.</li>
+      <li>Chaque mail indique qui écrit et pourquoi, et permet de refuser la suite en un mot, comme le demande la CNIL.</li>
+    </ul></div>
   </section>
 
   <section>
@@ -139,8 +149,10 @@ ul { margin: 0; padding-left: 18px; } li { margin: 4px 0; }
         <p>Bonjour,</p><p>À 20 minutes de votre site, le Fort de Feyzin accueille jusqu'à 1 000 personnes dans 26 hectares de forêt, avec un Théâtre de Verdure. La Région Auvergne-Rhône-Alpes et l'Inserm nous ont déjà fait confiance.</p><p>Vous avez un grand rendez-vous d'équipe en préparation ?</p><p>Guillaume Rac<br>GEM</p></div></article>
       <article class="mail"><div class="tete"><span>IAC</span><span>Objet : <b>une plénière dans un centre d'art</b></span></div><div class="corps">
         <p>Bonjour,</p><p>À deux pas de la Part-Dieu, l'Institut d'art contemporain de Villeurbanne reçoit vos plénières jusqu'à 300 personnes, au milieu des œuvres. Un cadre qu'on retient, et un seul interlocuteur pour l'organisation.</p><p>Je vous envoie les disponibilités ?</p><p>Guillaume Rac<br>GEM</p></div></article>
-      <article class="mail"><div class="tete"><span>Relance (jour 4)</span><span>Dans le même fil</span></div><div class="corps">
-        <p>Bonjour,</p><p>Je vous joins une photo du lieu. S'il vous faut une date au premier semestre, je peux en bloquer une sans engagement, le temps d'en parler en interne.</p><p>Guillaume</p></div></article>
+      <article class="mail"><div class="tete"><span>Jour 7</span><span>Dans le même fil</span></div><div class="corps">
+        <p>Bonjour,</p><p>Je vous joins une photo du lieu en configuration séminaire. Si une date au printemps vous intéresse, je peux vous en garder une sans engagement, le temps d'en parler en interne.</p><p>Guillaume</p></div></article>
+      <article class="mail"><div class="tete"><span>Relance de saison (2 à 3 mois)</span><span>Nouveau message</span></div><div class="corps">
+        <p>Bonjour,</p><p>C'est en ce moment que se réservent les séminaires de juin et de la rentrée. Si un rendez-vous d'équipe se prépare chez vous, je vous envoie nos disponibilités.</p><p>Guillaume Rac<br>GEM</p></div></article>
     </div>
     <p class="note">Les références citées sont celles de votre brief. Les dates libres et les photos viennent de vous, jamais inventées. Rien ne part sans votre accord.</p>
   </section>
